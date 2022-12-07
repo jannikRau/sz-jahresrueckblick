@@ -1,19 +1,26 @@
 import Koa from 'koa';
-// @ts-ignore
 import cors from '@koa/cors';
-import { applicationRouterMiddleware } from './router/applicationRouter';
+import { getApplicationRouterMiddleware } from './router/applicationRouter';
+import { Snowflake } from './snowflake/Snowflake';
+import { defaultHeaderMiddleware } from './middleware/defaultHeaderMiddleware';
+import { requestLoggingMiddleware } from './middleware/requestLoggingMiddleware';
+import { Logger } from 'pino';
+import { responseLoggingMiddleware } from './middleware/responseLoggingMiddleware';
 
-export const app = new Koa();
+export function createApp(snowflake: Snowflake, logger: Logger): Koa {
+  const app = new Koa();
+  registerMiddlewaresForApp(app, snowflake, logger);
+  return app;
+}
 
-app.use(cors());
-
-app.use(async (ctx, next) => {
-  ctx.set(defaultHeaders);
-  await next();
-});
-
-app.use(applicationRouterMiddleware);
-
-const defaultHeaders = {
-  'content-type': 'application/json',
-};
+function registerMiddlewaresForApp(
+  app: Koa,
+  snowflake: Snowflake,
+  logger: Logger,
+) {
+  app.use(cors());
+  app.use(requestLoggingMiddleware(logger));
+  app.use(defaultHeaderMiddleware);
+  app.use(getApplicationRouterMiddleware(snowflake));
+  app.use(responseLoggingMiddleware(logger));
+}

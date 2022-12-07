@@ -1,8 +1,16 @@
-import { app } from './app';
+import { createApp } from './app';
 import { config } from './config';
 import { logger } from './common/logger';
+import { Snowflake } from './snowflake/Snowflake';
 
-const server = app.listen(config.port, () => {
+const snowflake = new Snowflake({
+  username: config.snowflakeUsername,
+  password: config.snowflakePassword,
+  account: config.snowflakeAccount,
+  role: config.snowflakeRole,
+});
+
+const server = createApp(snowflake, logger).listen(config.port, () => {
   logger.info(`Application server running on port ${config.port}`);
 });
 

@@ -10,15 +10,6 @@ import { getUserDataQuery } from './snowflakeQueries';
 import { UserData } from '../model/UserData';
 import { createUserDataFromRows } from '../transformer/userData.transformer';
 
-/*
-
-username: 'CARMENHEGER',
-password: 'cbz56rg2WasAHwq',
-account: 'swmh_datenplattform.eu-central-1',
-role: 'G_SZDM_PAY',
-
- */
-
 interface UserDataWrapper {
   userData: UserData | undefined;
 }
@@ -48,7 +39,7 @@ export class Snowflake {
             );
             reject(err);
           } else {
-            logger.info(
+            logger.debug(
               { rows },
               'Successfully executed statement for getting userData',
             );

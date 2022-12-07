@@ -8,7 +8,8 @@ export function createUserDataFromRows(
   const userData = rows?.pop();
   if (userData) {
     const numberOfArticles = userData.CNT_ARTICLES;
-    const percentileNumberOfArticles = getPercentileOfReadArticles(numberOfArticles);
+    const percentileNumberOfArticles =
+      getPercentileOfReadArticles(numberOfArticles);
     const topDepartments = Object.entries(userData.RESSORTS)
       .sort((a, b) => {
         return (b[1] as number) - (a[1] as number);
@@ -56,8 +57,8 @@ function mapWeekday(weekday: weekday) {
 }
 
 function getPercentileOfReadArticles(numberOfArticles: number) {
-  if(numberOfArticles <= 5) return 25;
-  if(numberOfArticles <= 28) return 50;
-  if(numberOfArticles <= 154 || numberOfArticles > 154) return 75;
+  if (numberOfArticles <= 5) return 25;
+  if (numberOfArticles <= 28) return 50;
+  if (numberOfArticles <= 154 || numberOfArticles > 154) return 75;
   return 0;
 }
