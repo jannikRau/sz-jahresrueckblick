@@ -1,4 +1,4 @@
-const getUserDataQuery = (userId: string): string => {
+const getSzUsageOfYearQuery = (userId: string): string => {
   return `
     SELECT *
     FROM SZ_SAND.PUBLIC.SDJRUECKFULL_AGG
@@ -6,4 +6,4 @@ const getUserDataQuery = (userId: string): string => {
     `;
 };
 
-export { getUserDataQuery };
+export { getSzUsageOfYearQuery };

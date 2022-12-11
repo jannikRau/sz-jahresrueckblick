@@ -6,12 +6,10 @@ import {
   Statement,
 } from 'snowflake-sdk';
 import { logger } from '../common/logger';
-import { getUserDataQuery } from './snowflakeQueries';
-import { UserData } from '../model/UserData';
-import { createUserDataFromRows } from '../transformer/userData.transformer';
+import { getSzUsageOfYearQuery } from './snowflakeQueries';
 
-interface UserDataWrapper {
-  userData: UserData | undefined;
+export interface QueryResult {
+  rows: any[] | undefined;
 }
 
 export class Snowflake {
@@ -22,11 +20,12 @@ export class Snowflake {
     this.connect();
   }
 
-  public async getUserData(userId: string): Promise<UserData | undefined> {
-    let userDataWrapper: UserDataWrapper = { userData: undefined };
-    return new Promise<UserData | undefined>((resolve, reject) => {
+  public async executeSzUsageOfYearQuery(
+    userId: string,
+  ): Promise<QueryResult> {
+    return new Promise<QueryResult>((resolve, reject) => {
       this.snowFlakeConnection.execute({
-        sqlText: getUserDataQuery(userId),
+        sqlText: getSzUsageOfYearQuery(userId),
         complete: (
           err: SnowflakeError | undefined,
           _stmt: Statement,
@@ -40,11 +39,10 @@ export class Snowflake {
             reject(err);
           } else {
             logger.debug(
-              { rows },
+              { result: rows ?? '<empty>' },
               'Successfully executed statement for getting userData',
             );
-            userDataWrapper.userData = createUserDataFromRows(rows);
-            resolve(userDataWrapper.userData);
+            resolve({ rows });
           }
         },
       });

@@ -4,13 +4,11 @@
   "description": "",
   "main": "dist/server.js",
   "scripts": {
-    "test": "npm run build-and-lint && dotenv -e .env -- jest",
+    "test": "npm run build && dotenv -e .env -- jest",
     "start": "node dist/server.js",
-    "start:dev": "npm run build-and-lint && dotenv -e .env -- node dist/server.js",
+    "start:dev": "npm run build && dotenv -e .env -- node dist/server.js",
     "postinstall": "tsc",
     "build": "tsc -p tsconfig.build.json",
-    "lint": "eslint -c .eslintrc.json '**/*.{tsx,ts,jsx,js}'",
-    "build-and-lint": "npm run lint && npm run build",
     "prettier": "prettier --write '**/*.{ts,tsx,js,jsx}'",
     "deploy": "git add . && git commit -m Heroku && git push heroku master"
   },

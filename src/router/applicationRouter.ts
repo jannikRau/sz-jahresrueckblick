@@ -1,5 +1,5 @@
 import router from 'koa-joi-router';
-import { getSzUsageOfYearController } from '../controller/szUsageOfYear.controller';
+import { getSzUsageOfYearHandler } from '../handler/personalReviewYearly.handler';
 import { Snowflake } from '../snowflake/Snowflake';
 
 export function getApplicationRouterMiddleware(snowflake: Snowflake) {
@@ -9,7 +9,7 @@ export function getApplicationRouterMiddleware(snowflake: Snowflake) {
   applicationRouter.route({
     method: 'get',
     path: '/sz-jahresreview/:userId',
-    handler: getSzUsageOfYearController(snowflake),
+    handler: getSzUsageOfYearHandler(snowflake),
     validate: {
       params: {
         userId: Joi.string().required(),
