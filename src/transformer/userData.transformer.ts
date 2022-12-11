@@ -57,8 +57,8 @@ function mapWeekday(weekday: weekday) {
 }
 
 function getPercentileOfReadArticles(numberOfArticles: number) {
-  if (numberOfArticles <= 5) return 25;
-  if (numberOfArticles <= 28) return 50;
-  if (numberOfArticles <= 154 || numberOfArticles > 154) return 75;
+  if (numberOfArticles <= 214) return 25;
+  if (numberOfArticles <= 451) return 50;
+  if (numberOfArticles <= 946 || numberOfArticles > 946) return 75;
   return 0;
 }
