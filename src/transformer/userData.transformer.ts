@@ -35,6 +35,7 @@ export function createUserDataFromRows(
       topDepartments,
       mostActiveWeekday,
       percentileNumberOfArticles,
+      weekdayActivity
     };
   }
 }
