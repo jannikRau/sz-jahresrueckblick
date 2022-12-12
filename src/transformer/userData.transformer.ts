@@ -22,6 +22,8 @@ export function createUserDataFromRows(
       })
       .map((keyVal) => keyVal[0])
       .slice(0, 10);
+    const weekdayActivity =
+      getSortedWeekdayArray(Object.entries(userData.WEEKDAYS));
     const mostActiveWeekday = mapWeekday(
       Object.entries(userData.WEEKDAYS).sort((a, b) => {
         return (b[1] as number) - (a[1] as number);
@@ -62,4 +64,11 @@ function getPercentileOfReadArticles(numberOfArticles: number) {
   if (numberOfArticles >= 450) return 50;
   if (numberOfArticles >= 210) return 25;
   return 2;
+}
+
+function getSortedWeekdayArray(weekdaysObject: any) {
+  const values = Object.values(weekdaysObject);
+  const weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  const missingValues = weekdays.map(day => dict[day] || 0);
+  return missingValues;
 }
