@@ -5,4 +5,6 @@ export interface UserData {
   topTopics: string[];
   percentileNumberOfArticles: number;
   weekdayActivity: number[];
+  topTopicsSZ: string[];
+  topTopicsMagazin: string[];
 }
