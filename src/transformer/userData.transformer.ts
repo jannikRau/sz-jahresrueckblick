@@ -83,9 +83,9 @@ function getSortedWeekdayArray(weekdaysObject: any) {
 
 function getTopTopicsPerSite(topicsObject: any, site: string) {
   const topTopics = Object.keys(topicsObject)
-    .filter(key => key.startsWith(site)
+    .filter(key => key.startsWith(site))
     .map(key => key.split(":")[1])
-    .sort((a, b) => dict[b] - dict[a])
+    .sort((a, b) => topicsObject[b] - topicsObject[a])
     .slice(0, 10);
   return topTopics;
 }
