@@ -69,7 +69,8 @@ function getPercentileOfReadArticles(numberOfArticles: number) {
 
 function getSortedWeekdayArray(weekdaysObject: any) {
   const weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-  const total = Object.values(weekdaysObject).reduce((sum, value) => sum + value, 0);
-  const missingValues = weekdays.map(day => Math.floor((weekdaysObject[day] / total) * 100) || 0);
-  return missingValues;
+  const missingValues = weekdays.map(day => weekdaysObject[day] || 0);
+  const total = missingValues.reduce((sum, value) => sum + value, 0);
+  const percentages = missingValues.map(value => Math.floor((value / total) * 100));
+  return percentages;
 }
