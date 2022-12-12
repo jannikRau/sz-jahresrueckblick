@@ -23,7 +23,7 @@ export function createUserDataFromRows(
       .map((keyVal) => keyVal[0])
       .slice(0, 10);
     const weekdayActivity =
-      getSortedWeekdayArray(Object.entries(userData.WEEKDAYS));
+      getSortedWeekdayArray(userData.WEEKDAYS);
     const mostActiveWeekday = mapWeekday(
       Object.entries(userData.WEEKDAYS).sort((a, b) => {
         return (b[1] as number) - (a[1] as number);
