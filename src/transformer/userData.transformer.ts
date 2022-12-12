@@ -22,6 +22,10 @@ export function createUserDataFromRows(
       })
       .map((keyVal) => keyVal[0])
       .slice(0, 10);
+    const topTopicsSZ =
+      getTopTopicsPerSite(userData.TOPICS, 'sz:');
+    const topTopicsMagazin =
+      getTopTopicsPerSite(userData.TOPICS, 'sz-magazin:');
     const weekdayActivity =
       getSortedWeekdayArray(userData.WEEKDAYS);
     const mostActiveWeekday = mapWeekday(
@@ -35,7 +39,9 @@ export function createUserDataFromRows(
       topDepartments,
       mostActiveWeekday,
       percentileNumberOfArticles,
-      weekdayActivity
+      weekdayActivity,
+      topTopicsSZ,
+      topTopicsMagazin
     };
   }
 }
@@ -73,4 +79,13 @@ function getSortedWeekdayArray(weekdaysObject: any) {
   const total = missingValues.reduce((sum, value) => sum + value, 0);
   const percentages = missingValues.map(value => Math.floor((value / total) * 100));
   return percentages;
+}
+
+function getTopTopicsPerSite(topicsObject: any, site: string) {
+  const topTopics = Object.keys(topicsObject)
+    .filter(key => key.startsWith(site)
+    .map(key => key.split(":")[1])
+    .sort((a, b) => dict[b] - dict[a])
+    .slice(0, 10);
+  return topTopics;
 }
