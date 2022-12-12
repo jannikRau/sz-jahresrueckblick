@@ -4,4 +4,5 @@ export interface UserData {
   mostActiveWeekday: string;
   topTopics: string[];
   percentileNumberOfArticles: number;
+  weekdayActivity: number[];
 }
