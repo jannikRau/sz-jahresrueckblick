@@ -23,7 +23,7 @@ export function createUserDataFromRows(
       .map((keyVal) => keyVal[0])
       .slice(0, 10);
     const topTopicsSZ =
-      getTopTopicsPerSite(userData.TOPICS, 'sz:');
+      getTopTopicsPerSite(userData.TOPICS, 'szde:');
     const topTopicsMagazin =
       getTopTopicsPerSite(userData.TOPICS, 'sz-magazin:');
     const weekdayActivity =
