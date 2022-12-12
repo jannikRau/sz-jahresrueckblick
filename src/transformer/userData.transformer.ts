@@ -67,8 +67,7 @@ function getPercentileOfReadArticles(numberOfArticles: number) {
 }
 
 function getSortedWeekdayArray(weekdaysObject: any) {
-  const values = Object.values(weekdaysObject);
   const weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-  const missingValues = weekdays.map(day => dict[day] || 0);
+  const missingValues = weekdays.map(day => weekdaysObject[day] || 0);
   return missingValues;
 }
